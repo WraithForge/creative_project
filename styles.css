@@ -1,0 +1,188 @@
+* {
+  /*background-color: #113c6d;*/
+}
+
+nav {
+  background-color: #002b5c;
+}
+
+.nav-item {
+  background-color: #002b5c;
+  color: #FFD700;
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 20px;
+}
+
+.nav-link {
+  background-color: #002b5c;
+  color: #FFD700;
+  font-family: 'Shadows Into Light', cursive;
+    font-size: 20px;
+}
+
+.navbar-brand {
+  background-color: #002b5c;
+  color: #FFD700;
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 30px;
+}
+
+footer {
+  background-color: #002b5c;
+  color: #FFD700;
+  font-size: 20px;
+}
+
+.navbar {
+  background-color: #002b5c;
+}
+
+.navbar-expand-lg {
+  background-color: #002b5c;
+}
+
+.bg-primary {
+  background-color: #002b5c;
+}
+
+.bg-secondary {
+  background-color: #002b5c;
+}
+
+.contact {
+  width: 40%;
+  min-width: 350px;
+  margin: auto;
+  padding: 20px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 20px;
+  background-color: #002b5c;
+  color: #ffd700;
+  box-shadow: inset 0 0 0 5px #ffd700;
+  border: 15px solid #002b5c;
+}
+.order-menu {
+  width: 40%;
+  min-width: 350px;
+  margin: auto;
+  padding: 5px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 20px;
+  background-color: #002b5c;
+  color: #ffd700;
+  box-shadow: inset 0 0 0 5px #ffd700;
+  border: 15px solid #002b5c;
+  display: flex;
+  justify-content: space-between;
+}
+.order-text {
+  width: 65%;
+  margin: auto;
+  text-align: center;
+}
+
+.order-price {
+  width: 25%;
+  margin: auto;
+  text-align: center;
+}
+
+.review-box{
+  width: 40%;
+  min-width: 350px;
+  background-color: #002b5c;
+  color: #FFD700;
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 25px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+.review-text{
+  width: 65%;
+  background-color: #0CBAA6;
+  color: #FFFFFF;
+  margin: auto;
+  text-align: center;
+}
+.review-name{
+  width: 25%;
+  background-color: #0CBAA6;
+  color: #FFFFFF;
+  margin: auto;
+  text-align: center;
+}
+.review-box1 {
+  top: 330px;
+  text-align: center;
+  padding: 10px;
+  box-shadow: inset 0 0 0 5px #ffd700;
+  border: 15px solid #002b5c;
+}
+.review-box2 {
+  top: 260px;
+}
+.review-box3 {
+  top: 390px;
+}
+.review-box4 {
+  top: 540px;
+}
+.review-box5 {
+  top: 670px;
+}
+
+  img {
+    width: 100%;
+    margin-top: 15px;
+  }
+
+.col {
+  margin-top: 10px;
+  /*background-color: #d2b48c*/
+}
+
+.row {
+  /*background-color: #d2b48c*/
+}
+
+.img-transparent {
+  opacity: 0.5;
+}
+
+.item-title {
+  font-size: 25px;
+  padding: 10px;
+  font-weight: bold;
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+}
+
+.item-title2 {
+  font-size: 35px;
+  font-family: 'Shadows Into Light', cursive;
+}
+.banner {
+  background-color: #002b5c;
+  color: #ffd700;
+  padding: 20px;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+  width: 95%;
+  margin: auto;
+  box-shadow: inset 0 0 0 5px #ffd700;
+  border: 15px solid #002b5c;
+}
+
+.item-stats {
+  text-align: left;
+}
