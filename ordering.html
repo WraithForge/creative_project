@@ -71,13 +71,82 @@
     An in-process .pdf will be sent upon request to ensure that the item follows the customer request.
     All sales are final.
   </div>
-<!neeed to throw a menu into this>
+
+  <br>
+  <div class='contact'>
+    Welcome to a new addition!<br><br>
+    Now you can we help generate ideas for potential magic items for you,
+    if you're not quite sure what you might want yet. To do so, just type in a spell name or part of a name, and the name of an object.
+    They don't have to be complete names, we'll come up with a list of objects based on what matches during the search.
+    <br><br>
+    <form id="userChoice">
+      Enter an item, or part of an item name in the first box, and the name for a spell, or part of one the second box!<br>
+      <input id="itemText">
+      <input id="spellText">
+      <input type="submit" value="Get List!"><br>
+    </form>
+  </div>
+  <br>
+  <div class='order-menu'>
+    <div id="itemTextBox" class='item-list'>Enter an item name!</div>
+    <div id="spellTextBox" class='item-list'>Enter a spell name!</div>
+  </div>
+
 <br>
-<footer> <!need to put the url somewhere here?>
+<footer>
   <a href+"https://github.com/WraithForge/creative_project">https://github.com/WraithForge/creative_project</a>
 </footer>
+
+<script>
+document.getElementById("userChoice").addEventListener("submit", function(event) {
+    event.preventDefault();
+    var itemID = document.getElementById("itemText").value;
+    itemID = itemID.toLowerCase();
+    var spellID = document.getElementById("spellText").value;
+    spellID = spellID.toLowerCase();
+    var itemURL = "https://www.dnd5eapi.co/api/equipment";
+    var spellURL = "https://www.dnd5eapi.co/api/spells";
+    var returnString = "All items that match: <br>";
+    returnString += "<ul>";
+    fetch(itemURL)
+    .then(function(response) {
+      return response.json();
+    }).then(function(json) { //we can get data, now to print the stuff?
+      for(var i = 0; i < json.count; ++i) {
+        var text = json.results[i].name;
+        text = text.toLowerCase();
+        if(text.search(itemID) >= 0) {
+          returnString += "<li> " + json.results[i].name;
+        }
+      }
+      returnString += "</ul>";
+      document.getElementById("itemTextBox").innerHTML = returnString;
+    });
+    fetch(spellURL)
+    .then(function(response) {
+      return response.json();
+    }).then(function(json) { //we can get data, now to print the stuff?
+      var spellString =  "All spells that match: <br>";
+      spellString += "<ul>";
+      for(var i = 0; i < json.count; ++i) {
+        var text = json.results[i].name;
+        text = text.toLowerCase();
+        if(text.search(spellID) >= 0) {
+          spellString += "<li> " + json.results[i].name; //need to mod return string
+        }
+      }
+      spellString += "</ul>";
+      document.getElementById("spellTextBox").innerHTML = spellString;
+    });
+  });
+</script>
+
+
+  <!I don't think our script is even running, probably the issue there>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
+
+
 </html>

@@ -186,3 +186,7 @@ footer {
 .item-stats {
   text-align: left;
 }
+
+.item-list {
+  padding: 5px;
+}
