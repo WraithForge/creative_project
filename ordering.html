@@ -85,17 +85,217 @@
       <input id="spellText">
       <input type="submit" value="Get List!"><br>
     </form>
+    <br>
+    <form id="randomItemChoice">
+      Or, hit this button to get a randomly generated item!<br>
+      <input type="submit" value="Get Random Item!"><br>
+    </form>
   </div>
   <br>
   <div class='order-menu'>
-    <div id="itemTextBox" class='item-list'>Enter an item name!</div>
-    <div id="spellTextBox" class='item-list'>Enter a spell name!</div>
+    <div id="itemTextBox" class='item-list'>Items will appear here!</div>
+    <div id="spellTextBox" class='item-list'>Spells will appear here!</div>
+  </div>
+  <br>
+  <div class='contact'>
+    <div id="randomItemBox" class= 'item-list'> Random items will appear here!</div>
   </div>
 
 <br>
 <footer>
   <a href+"https://github.com/WraithForge/creative_project">https://github.com/WraithForge/creative_project</a>
 </footer>
+
+<script>
+  document.getElementById("randomItemChoice").addEventListener("submit", function(event) {
+    event.preventDefault();
+    var itemURL = "https://www.dnd5eapi.co/api/equipment"; //these get us a list of items we can use
+    var spellURL = "https://www.dnd5eapi.co/api/spells";
+    var incompleteAdjURL = "https://api.datamuse.com/words?rel_jja=";
+    //var nameURL = require("./names.json");
+
+    var returnString = "Randomly generated items: <br>";
+    returnString += "<ul>";
+    for(let i = 0; i < 5; ++i) {
+        let randomNameType = Math.floor(Math.random() * 6);
+        //returnString += "<li> " + randomNameType;
+        if(randomNameType == 0) {
+        fetch("/names.json")
+        .then(function(response) {
+          return response.json();
+        }).then(function(json) { //we can get data, now to print the stuff?
+            var nameNumber = Math.floor(Math.random() * 100);
+            var nameJSON = json;
+            fetch(itemURL)
+            .then(function(response) {
+              return response.json();
+            }).then(function(json) { //we can get data, now to print the stuff?
+                var itemNumber = Math.floor(Math.random() * 237);
+                var itemJSON = json;
+                fetch(spellURL)
+                .then(function(response) {
+                  return response.json();
+                }).then(function(json) { //we can get data, now to print the stuff?
+                    var spellNumber = Math.floor(Math.random() * 319);
+                    returnString += "<li> " + nameJSON.names[nameNumber].name + "'s " + itemJSON.results[itemNumber].name + " of " + json.results[spellNumber].name;
+                    returnString += "</ul>";
+                    document.getElementById("randomItemBox").innerHTML = returnString;
+                }); //spells
+            });//items
+        });//names
+          //name's of item of verbing
+        }
+        else if(randomNameType == 1) {
+          fetch(itemURL)
+          .then(function(response) {
+            return response.json();
+          }).then(function(json) { //we can get data, now to print the stuff?
+              var itemNumber = Math.floor(Math.random() * 237);
+              var itemJSON = json;
+              fetch(spellURL)
+              .then(function(response) {
+                return response.json();
+              }).then(function(json) { //we can get data, now to print the stuff?
+                  var spellNumber = Math.floor(Math.random() * 319);
+                  returnString += "<li> " +  itemJSON.results[itemNumber].name + " of " + json.results[spellNumber].name;
+                  returnString += "</ul>";
+                  document.getElementById("randomItemBox").innerHTML = returnString;
+              }); //spells
+          });//items
+          //item of verbing
+        }
+        else if(randomNameType == 2) {
+          //item of the noun
+          fetch(itemURL)
+          .then(function(response) {
+            return response.json();
+          }).then(function(json) { //we can get data, now to print the stuff?
+              var itemNumber = Math.floor(Math.random() * 237);
+              var itemJSON = json;
+
+              fetch(itemURL)
+              .then(function(response) {
+                return response.json();
+              }).then(function(json) { //we can get data, now to print the stuff?
+                  var itemNumber = Math.floor(Math.random() * 237);
+                  var itemJSON = json;
+
+                  fetch("/names.json")
+                  .then(function(response) {
+                    return response.json();
+                  }).then(function(json) { //we can get data, now to print the stuff?
+                      var nounNumber = Math.floor(Math.random() * 100);
+                      returnString += "<li> " +  itemJSON.results[itemNumber].name + " of  the " + json.nouns[nounNumber].noun.charAt(0).toUpperCase() + json.nouns[nounNumber].noun.substr(1);
+                      returnString += "</ul>";
+                      document.getElementById("randomItemBox").innerHTML = returnString;
+                  }); //spells
+              });
+
+          });
+        }
+        else if(randomNameType == 3) {
+          //adj item
+          fetch(itemURL)
+          .then(function(response) {
+            return response.json();
+          }).then(function(json) { //we can get data, now to print the stuff?
+            var itemNumber = Math.floor(Math.random() * 237);
+            var itemJSON = json;
+            //make adj url first?//maybe use a noun?
+            fetch("/names.json")
+            .then(function(response) {
+              return response.json();
+            }).then(function(json) { //we can get data, now to print the stuff?
+                var nounNumber = Math.floor(Math.random() * 100); //this will be used to build a adj itemURL
+                var completeAdjURL = incompleteAdjURL + json.nouns[nounNumber].noun
+                //let's use the first 25 only.
+                fetch(completeAdjURL)
+                .then(function(response) {
+                  return response.json();
+                }).then(function(json) { //we can get data, now to print the stuff?
+                    var adjNumber = Math.floor(Math.random() * 5);
+                    returnString += "<li> " +  json[adjNumber].word.charAt(0).toUpperCase() + json[adjNumber].word.substring(1) + " " + itemJSON.results[itemNumber].name;
+                    returnString += "</ul>";
+                    document.getElementById("randomItemBox").innerHTML = returnString;
+                });
+            });
+          });
+        }
+        else if(randomNameType == 4) {
+          fetch(itemURL)
+          .then(function(response) {
+            return response.json();
+          }).then(function(json) { //we can get data, now to print the stuff?
+            var itemNumber = Math.floor(Math.random() * 237);
+            var itemJSON = json;
+            //make adj url first?//maybe use a noun?
+            fetch("/names.json")
+            .then(function(response) {
+              return response.json();
+            }).then(function(json) { //we can get data, now to print the stuff?
+                var nounNumber = Math.floor(Math.random() * 100); //this will be used to build a adj itemURL
+                var completeAdjURL = incompleteAdjURL + json.nouns[nounNumber].noun
+                //let's use the first 25 only.
+                fetch(completeAdjURL)
+                .then(function(response) {
+                  return response.json();
+                }).then(function(json) { //we can get data, now to print the stuff?
+                  var adjNumber = Math.floor(Math.random() * 5);
+                  var firstAdj = json[adjNumber].word.charAt(0).toUpperCase() + json[adjNumber].word.substring(1);
+                  var secondCompleteURL = incompleteAdjURL + firstAdj;
+                  fetch(secondCompleteURL)
+                  .then(function(response) {
+                    return response.json();
+                  }).then(function(json) { //we can get data, now to print the stuff?
+                      var newAdjNumber = Math.floor(Math.random() * 5);
+                      returnString += "<li> " + firstAdj + " " + json[newAdjNumber].word.charAt(0).toUpperCase() + json[newAdjNumber].word.substring(1) + " " + itemJSON.results[itemNumber].name;
+                      returnString += "</ul>";
+                      document.getElementById("randomItemBox").innerHTML = returnString;
+                  });
+                });
+            });
+          });
+          //adj adj item
+        }
+        else if(randomNameType == 5) {
+          //item of adj noun
+          fetch(itemURL)
+          .then(function(response) {
+            return response.json();
+          }).then(function(json) { //we can get data, now to print the stuff?
+            var itemNumber = Math.floor(Math.random() * 237);
+            var itemJSON = json;
+
+            fetch("/names.json")
+            .then(function(response) {
+              return response.json();
+            }).then(function(json) { //we can get data, now to print the stuff?
+              var nounNumber = Math.floor(Math.random() * 100); //this will be used to build a adj itemURL
+              var completeAdjURL = incompleteAdjURL + json.nouns[nounNumber].noun;
+              var finalNoun = json.nouns[nounNumber].noun.charAt(0).toUpperCase() + json.nouns[nounNumber].noun.substring(1);
+              //now fetch the adj
+              fetch(completeAdjURL)
+              .then(function(response) {
+                return response.json();
+              }).then(function(json) { //we can get data, now to print the stuff?
+                  var newAdjNumber = Math.floor(Math.random() * 5);
+                  var adjWord = json[newAdjNumber].word.charAt(0).toUpperCase() + json[newAdjNumber].word.substring(1);
+                  //now have adj
+                  returnString += "<li> " + itemJSON.results[itemNumber].name + " of " + adjWord + " " + finalNoun;
+                  returnString += "</ul>";
+                  document.getElementById("randomItemBox").innerHTML = returnString;
+              });
+            });
+            //ignore the below stuff
+
+          });
+        }
+        //
+    }
+    returnString += "</ul>";
+    document.getElementById("randomItemBox").innerHTML = returnString;
+  });
+</script>
 
 <script>
 document.getElementById("userChoice").addEventListener("submit", function(event) {
